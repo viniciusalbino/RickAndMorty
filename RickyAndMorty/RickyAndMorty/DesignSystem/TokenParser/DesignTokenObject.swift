@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct DesignTokenObject: Decodable {
+struct DesignTokenObject: Mappable {
     var properties: [DesignToken]
 }
 
-struct DesignToken: Decodable {
+struct DesignToken: Mappable {
     var type: TokenType?
     var category: TokenCategory?
     var name: String

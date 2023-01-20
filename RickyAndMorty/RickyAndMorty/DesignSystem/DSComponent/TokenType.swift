@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum TokenType: String, Decodable {
+enum TokenType: String, Mappable {
     case string
     case unit
     case color

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Properties: Decodable {
+struct Properties: Mappable {
     
     var tokens: [DesignToken] = []
     

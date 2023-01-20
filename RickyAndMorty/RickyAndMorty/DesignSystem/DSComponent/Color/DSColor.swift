@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public enum Color: String, CaseIterable, Codable {
+public enum Color: String, CaseIterable, Mappable {
     case primaryColor
     case secondaryColor
     case textPrimaryColor

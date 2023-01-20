@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Component: Decodable {
+public struct Component: Mappable {
     var type: TokenType?
     var category: TokenCategory?
     var name: String

@@ -8,6 +8,7 @@
 import Foundation
 
 public typealias JSONDictionary = [String: Any]
+public typealias Mappable = Codable & Equatable
 
 infix operator <-->
 
