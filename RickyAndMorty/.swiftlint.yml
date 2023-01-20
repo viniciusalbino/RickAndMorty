@@ -1,0 +1,135 @@
+# ------------------------------------------------------------------------------
+# INCLUDE, EXCLUDE & IGNORED PATHS
+# ------------------------------------------------------------------------------
+
+# paths to include during linting.
+included:
+  - RickyAndMorty
+
+# paths to ignore during linting.
+excluded:
+  - Pods
+
+# ------------------------------------------------------------------------------
+# EXCLUDE & IGNORED RULES
+# ------------------------------------------------------------------------------
+
+# rule identifiers to exclude from running
+disabled_rules:
+  - trailing_whitespace
+  - large_tuple
+  - missing_docs
+  - cyclomatic_complexity
+  - for_where
+  - class_delegate_protocol
+  - private_over_fileprivate
+opt_in_rules: # some rules are only opt-in
+  - overridden_super_call
+  - closure_spacing
+  - closure_end_indentation
+  - redundant_nil_coalescing
+  - operator_usage_whitespace
+  - explicit_init
+  - vertical_parameter_alignment_on_call
+  - conditional_returns_on_newline
+  # Find all the available rules by running:
+  # swiftlint rules
+
+# ------------------------------------------------------------------------------
+# LENGHT RULES
+# ------------------------------------------------------------------------------
+
+# file
+file_length:
+  warning: 700 # lenght considered warning
+  error: 1200  # lenght considered error
+
+# type body
+type_body_length:
+  - 400 # lenght considered warning
+  - 500  # lenght considered error
+
+# code line
+line_length: 500
+
+# ------------------------------------------------------------------------------
+# FORCE RULES
+# ------------------------------------------------------------------------------
+
+# force
+force_cast: warning
+force_try: warning
+
+# ------------------------------------------------------------------------------
+# NAMING RULES
+# ------------------------------------------------------------------------------
+
+# type name
+type_name:
+  min_length: 3
+  max_length:
+    warning: 50
+  excluded:
+    - iPhone
+
+# identifier name
+identifier_name:
+  min_length: 3
+  max_length:
+    warning: 50
+  excluded:
+    - id
+    - URL
+    - url
+    - map
+    - key
+    - rhs
+    - lhs
+    - loading(Bool)
+
+# ------------------------------------------------------------------------------
+# CUSTOM RULES
+# ------------------------------------------------------------------------------
+
+custom_rules:
+
+  # Style Guide
+  sg_nil_verification:
+    name: "SG nil verification"
+    regex: "(!=[ ]*nil[ ]*[{][ ]*[}]|==[ ]*nil[ ]*[{][ ]*[}])"
+    message: "Avoid use != nil {} or == nil {}. Example: instead of using 'param != nil {} else', use 'param == nil'"
+    severity: warning
+
+  # Style Guide
+  is_not_empty_rule:
+    name: "Not empty verification SG"
+    regex: "([.]count|[.]length[(][)] )[ ]*>[ ]*0"
+    message: "Use IsNotEmpty instead of count > 0"
+    severity: warning
+
+  # Style Guide
+  isEmpty_rule:
+    name: "Empty verification SG"
+    regex: "([.]count|[.]length[(][)] )[ ]*==[ ]*0"
+    message: "Use isEmpty instead of count == 0"
+    severity: warning
+
+  # Use to avoid unnecessary inheritance
+  viewModel_unnecessary_inheritance:
+    name: "Presenter Inheritance "
+    regex: "Presenter[ ]*:[ ]*NSObject"
+    message: "Presenter unnecessary inheritance"
+    severity: warning
+
+  # Use localized before to upperCase or lowerCase a String
+  localized_rule:
+    name: "Localized rule"
+    regex: "cased[(][])].localized"
+    message: "Use localized before to upperCase or lowerCase a String"
+    severity: warning
+
+# ------------------------------------------------------------------------------
+# REPORTER TYPE (xcode, json, csv, checkstyle, junit, html, emoji)
+# ------------------------------------------------------------------------------
+
+reporter: "xcode"
