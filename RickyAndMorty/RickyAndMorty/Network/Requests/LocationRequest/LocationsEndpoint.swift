@@ -1,27 +1,27 @@
 //
-//  CharacterRequest.swift
+//  LocationsEndpoint.swift
 //  RickyAndMorty
 //
-//  Created by Vinicius Albino on 20/01/23.
+//  Created by Vinicius Albino on 21/01/23.
 //
 
 import Foundation
 
-enum CharacterEndpoint {
+enum LocationsEndpoint {
     case getById(Int)
     case getAll
     case getbyPage(Int)
 }
 
-extension CharacterEndpoint: NetworkCoreEndpoint {    
+extension LocationsEndpoint: NetworkCoreEndpoint {
     var path: String {
         switch self {
         case .getById(let id):
-            return "character/\(id)"
+            return "location/\(id)"
         case .getbyPage(let page):
-            return "character/?page=\(page)"
+            return "location/?page=\(page)"
         case .getAll:
-            return "character"
+            return "location"
         }
     }
     

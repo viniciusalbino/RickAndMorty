@@ -17,7 +17,7 @@ class TabBarController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadTabBar(viewControllers: [UIViewController(), UIViewController()], tabs: [.home, .favorites])
+        loadTabBar(viewControllers: [HomeControllerBuilder().build(), UIViewController()], tabs: [.home, .favorites])
     }
     
     func loadTabBar(viewControllers: [UIViewController], tabs: [TabBarItem]) {

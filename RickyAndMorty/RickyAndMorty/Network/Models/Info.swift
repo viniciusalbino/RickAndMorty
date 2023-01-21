@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Info: Codable {
+struct Info: Mappable {
     let count: Int
     let pages: Int
     let next: String?
