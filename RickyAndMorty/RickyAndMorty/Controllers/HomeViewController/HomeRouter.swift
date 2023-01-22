@@ -13,4 +13,30 @@ final class HomeRouter: HomeRouterProtocol {
     weak var viewController: UIViewController?
     
     // MARK: - Module setup -
+    func loadCharactersController() {
+        let controller = UIViewController()
+        DispatchQueue.main.async {
+            self.viewController?.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+    
+    func loadEpisodesController() {
+        
+    }
+    
+    func loadLocationsController() {
+        
+    }
+    
+    func loadCharacterDetailController() {
+        
+    }
+    
+    func loadEpisodeDetailController() {
+        
+    }
+    
+    func loadLocationDetailController() {
+        
+    }
 }

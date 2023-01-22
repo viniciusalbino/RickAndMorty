@@ -15,6 +15,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     
     // MARK: - Private Properties
     var collectionView : UICollectionView!
+    var isPageRefreshing: Bool = false
+    var currentPage: Int = 1
     
     // MARK: - Value Types
      private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
@@ -57,11 +59,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     func configureHeader() {
         dataSource?.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             
-            guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
+            guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader, let section = Section(rawValue: indexPath.section) else {
                 fatalError("Cannot create header view")
             }
             
-            supplementaryView.titleLabel.text = Section(rawValue: indexPath.section)?.title
+            supplementaryView.fill(title: section.title, section: section, delegate: self)
             return supplementaryView
         }
     }
@@ -92,6 +94,16 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             return nil
         })
     }
+    
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//       if(self.collectionView.contentOffset.x >= (self.collectionView.contentSize.width - self.collectionView.bounds.size.width)) {
+//           if !isPageRefreshing {
+//               isPageRefreshing = true
+//               print(currentPage)
+//               currentPage = currentPage + 1
+//           }
+//       }
+//   }
 }
 
 // MARK: - Presenter output protocol
@@ -177,5 +189,11 @@ extension HomeViewController {
         section.orthogonalScrollingBehavior = .groupPaging
         
         return section
+    }
+}
+
+extension HomeViewController: SectionHeaderDelegate {
+    func didClickedMore(section: Section) {
+        presenter.loadSectionController(section: section)
     }
 }

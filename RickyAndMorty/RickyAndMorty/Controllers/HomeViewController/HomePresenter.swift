@@ -46,6 +46,21 @@ extension HomePresenter: HomePresenterInputProtocol {
             viewController?.handle(payload: currentSnapshot)
         }
     }
+    
+    func loadSectionController(section: Section) {
+        switch section {
+        case .characters:
+            router.loadCharactersController()
+        case .episodes:
+            router.loadEpisodesController()
+        case .locations:
+            router.loadLocationsController()
+        }
+    }
+    
+    func loadDetailController() {
+        
+    }
 }
 
 // MARK: - Presenter Output Protocol

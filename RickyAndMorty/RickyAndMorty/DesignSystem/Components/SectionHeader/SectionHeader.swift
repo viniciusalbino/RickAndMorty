@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol SectionHeaderDelegate {
+    func didClickedMore(section: Section)
+}
+
 class SectionHeader: UICollectionReusableView {
     
     static var reuseIdentifier: String {
@@ -15,6 +19,9 @@ class SectionHeader: UICollectionReusableView {
     }
     
     var titleLabel: UILabel = UILabel()
+    var button: UIButton = UIButton()
+    var delegate: SectionHeaderDelegate?
+    var currentSection: Section?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,24 +45,36 @@ class SectionHeader: UICollectionReusableView {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
         
+        button = SecondaryButton(frame: .zero)
+        button.setTitle("More".localized(), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(clickedMore), for: .touchUpInside)
+        addSubview(button)
+        
         setupConstraints()
     }
     
     private func setupConstraints() {
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            NSLayoutConstraint.activate([
-                titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
-                titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -5)])
-        } else {
-            NSLayoutConstraint.activate([
-                titleLabel.leadingAnchor.constraint(equalTo: readableContentGuide.leadingAnchor),
-                titleLabel.trailingAnchor.constraint(lessThanOrEqualTo: readableContentGuide.trailingAnchor)
-            ])
-        }
-        
         NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             titleLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
+        
+        NSLayoutConstraint.activate([
+            button.trailingAnchor.constraint(equalTo: trailingAnchor),
+            button.heightAnchor.constraint(equalToConstant: 22),
+            button.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+    
+    @objc private func clickedMore() {
+        delegate?.didClickedMore(section: currentSection!)
+    }
+    
+    func fill(title: String, section: Section, delegate: SectionHeaderDelegate?) {
+        titleLabel.text = title
+        self.currentSection = section
+        self.delegate = delegate
     }
 }

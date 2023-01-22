@@ -16,6 +16,7 @@ protocol HomePresenterOutputProtocol: AnyObject {
 // MARK: - Presenter
 protocol HomePresenterInputProtocol: AnyObject {
     func loadContent()
+    func loadSectionController(section: Section)
 }
 
 // MARK: - Interactor
@@ -31,5 +32,15 @@ protocol HomeInteractorOutputProtocol: AnyObject {
 
 // MARK: - Router
 protocol HomeRouterProtocol: AnyObject {
+    func loadCharactersController()
     
+    func loadEpisodesController()
+    
+    func loadLocationsController()
+    
+    func loadCharacterDetailController()
+    
+    func loadEpisodeDetailController()
+    
+    func loadLocationDetailController() 
 }

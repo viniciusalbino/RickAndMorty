@@ -44,6 +44,7 @@
 		2CF3FDC1297D7CEB0052D3D6 /* CustomTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3FDC0297D7CEB0052D3D6 /* CustomTextCell.swift */; };
 		2CF3FDC5297D7E8F0052D3D6 /* UICollectionViewCell+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3FDC4297D7E8F0052D3D6 /* UICollectionViewCell+Extensions.swift */; };
 		2CF3FDC7297D7F2C0052D3D6 /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3FDC6297D7F2C0052D3D6 /* UILabel+Extensions.swift */; };
+		2CF3FDC9297D8EE20052D3D6 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CF3FDC8297D8EE20052D3D6 /* SecondaryButton.swift */; };
 		2D64EE12FFDEFAC0299DE849 /* Encodable+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23FA92B9F1289842619B250 /* Encodable+Extensions.swift */; };
 		304DDB5CDE994B8524D783BA /* Mappable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29EBCBD5388D61D8FF6C9C0 /* Mappable.swift */; };
 		34462FA43FD6C2D1F59E54FF /* DesignTokenObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28611B87F99EC73984538D9B /* DesignTokenObject.swift */; };
@@ -127,6 +128,7 @@
 		2CF3FDC0297D7CEB0052D3D6 /* CustomTextCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextCell.swift; sourceTree = "<group>"; };
 		2CF3FDC4297D7E8F0052D3D6 /* UICollectionViewCell+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionViewCell+Extensions.swift"; sourceTree = "<group>"; };
 		2CF3FDC6297D7F2C0052D3D6 /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		2CF3FDC8297D8EE20052D3D6 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		37077089E77F4C273325BA7F /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		4A77B4CC77B82FC5FD2B610C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AC04CD43F737CEACBC8D871 /* CharacterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRequest.swift; sourceTree = "<group>"; };
@@ -239,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				2CB799AE297B134500CB8B4B /* PrimaryButton.swift */,
+				2CF3FDC8297D8EE20052D3D6 /* SecondaryButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -656,6 +659,7 @@
 				2CF3FDC1297D7CEB0052D3D6 /* CustomTextCell.swift in Sources */,
 				2CB799C2297B1DD000CB8B4B /* HomeControllerBuilder.swift in Sources */,
 				1ED3B0CDA9DC880174EB4969 /* NetworkCoreRequestable.swift in Sources */,
+				2CF3FDC9297D8EE20052D3D6 /* SecondaryButton.swift in Sources */,
 				2CB799E4297C7C3800CB8B4B /* HomeInteractor.swift in Sources */,
 				2CB799CC297C5FD500CB8B4B /* Location.swift in Sources */,
 				A27BCA4FD03C7EFF16922176 /* NetworkCoreResponse.swift in Sources */,
