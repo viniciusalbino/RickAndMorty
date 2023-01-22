@@ -8,94 +8,174 @@
 import Foundation
 import UIKit
 
-enum Section : CaseIterable {
-  case one
-  case two
-}
-
-class Movies: Hashable {
-    
-    var name: String
-    var showDetails = false
-    var body: String
-    
-    init(name: String, body: String = "NA") {
-            
-        self.name = name
-        self.body = body
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        return hasher.combine(name)
-    }
-    
-    static func == (lhs: Movies, rhs: Movies) -> Bool {
-        return lhs.name == rhs.name
-    }
-}
-
 class HomeViewController: UIViewController, UICollectionViewDelegate {
     
+    // MARK: - Viper Properties
+    private let presenter: HomePresenterInputProtocol
+    
+    // MARK: - Private Properties
     var collectionView : UICollectionView!
     
+    // MARK: - Value Types
+     private var dataSource: UICollectionViewDiffableDataSource<Section, AnyHashable>?
+     private var currentSnapshot: NSDiffableDataSourceSnapshot<Section, AnyHashable>?
     
-    private lazy var dataSource = makeDataSource()
+    // MARK: - Init
+    
+    init(presenter: HomePresenter) {
+        self.presenter = presenter
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
+        nil
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let config = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
-        let layout = UICollectionViewCompositionalLayout.list(using: config)
+        setup()
+        configureDataSource()
+        configureHeader()
+        presenter.loadContent()
+    }
+    
+    private func setup() {
+        title = "Ricky And Morty"
+        view.backgroundColor = .designSystem(.secondaryColor)
         
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
-        self.view.addSubview(collectionView)
-        
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
         collectionView.delegate = self
-        collectionView.dataSource = dataSource
-        
-        //2
-        setData(animated: true)
+        collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseIdentifer)
+        collectionView.register(CustomTextCell.self, forCellWithReuseIdentifier: CustomTextCell.reuseIdentifer)
+        collectionView.register(SectionHeader.self, forSupplementaryViewOfKind: "section-header-element-kind", withReuseIdentifier: SectionHeader.reuseIdentifier)
+        collectionView.backgroundColor = .clear
+        collectionView.pinToBounds(of: view)
     }
     
-    
-    func makeDataSource() -> UICollectionViewDiffableDataSource<Section, Movies> {
-                   
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Movies> { cell, indexPath, movie in
+    // MARK: - Functions
+    func configureHeader() {
+        dataSource?.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
             
-            var content = cell.defaultContentConfiguration()
+            guard let supplementaryView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeader.reuseIdentifier, for: indexPath) as? SectionHeader else {
+                fatalError("Cannot create header view")
+            }
             
-            if movie.showDetails{
-                content.text = movie.name
-                content.secondaryText = movie.body
-            }
-            else{
-                content.text = movie.name
-            }
-            cell.contentConfiguration = content
+            supplementaryView.titleLabel.text = Section(rawValue: indexPath.section)?.title
+            return supplementaryView
         }
-        
-        return UICollectionViewDiffableDataSource<Section, Movies>(
-                    collectionView: collectionView,
-                    cellProvider: { collectionView, indexPath, item in
-                        collectionView.dequeueConfiguredReusableCell(
-                            using: cellRegistration,
-                            for: indexPath,
-                            item: item
-                        )
-                    }
-                )
     }
     
-    func setData(animated: Bool) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Movies>()
-        snapshot.appendSections(Section.allCases)
+    private func configureDataSource() {
+        dataSource = UICollectionViewDiffableDataSource<Section, AnyHashable>(collectionView: collectionView, cellProvider: { collectionView, indexPath, itemIdentifier in
+            if itemIdentifier is CharacterModel {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacterCell.reuseIdentifer, for: indexPath) as! CharacterCell
+                if let item = itemIdentifier as? CharacterModel {
+                    cell.fill(dto: item.dto())
+                }
+                return cell
+            }
+            if itemIdentifier is Location {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomTextCell.reuseIdentifer, for: indexPath) as! CustomTextCell
+                if let item = itemIdentifier as? Location {
+                    cell.fill(dto: item.dto())
+                }
+                return cell
+            }
+            if itemIdentifier is Episode {
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomTextCell.reuseIdentifer, for: indexPath) as! CustomTextCell
+                if let item = itemIdentifier as? Episode {
+                    cell.fill(dto: item.dto())
+                }
+                return cell
+            }
+            return nil
+        })
+    }
+}
 
-        snapshot.appendItems([Movies(name: "Wonder Woman", body: "<Add description>")], toSection: .one)
-        snapshot.appendItems([Movies(name: "Doctor Strange", body: "<Add description>")], toSection: .one)
-        snapshot.appendItems([Movies(name: "The Batman", body: "<Add description>")], toSection: .one)
+// MARK: - Presenter output protocol
+extension HomeViewController: HomePresenterOutputProtocol {
+    func handle(payload: NSDiffableDataSourceSnapshot<Section, AnyHashable>) {
+        currentSnapshot = payload
+        guard let snapShot = currentSnapshot else{
+            return
+        }
+        dataSource?.apply(snapShot, animatingDifferences: true)
+    }
+}
 
-        snapshot.appendItems([Movies(name: "Iron Man")], toSection: .two)
-
-        dataSource.apply(snapshot, animatingDifferences: animated)
+// MARK: - UICollectionView Layout Methods
+extension HomeViewController {
+    func generateLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
+                                                            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            let isWideView = layoutEnvironment.container.effectiveContentSize.width > 500
+            let sectionLayoutKind = Section.allCases[sectionIndex]
+            switch (sectionLayoutKind) {
+            case .characters:
+                return self.generateCharactersLayout(isWide: isWideView)
+            default:
+                return self.generateSharedlbumsLayout()
+            }
+            
+        }
+        return layout
+    }
+    
+    func generateCharactersLayout(isWide: Bool) -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(150),
+            heightDimension: .absolute(220))
+        let spacing = CGFloat.spacing(.spacingXs)
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
+        group.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: "section-header-element-kind",
+            alignment: .top)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [sectionHeader]
+        section.orthogonalScrollingBehavior = .groupPaging
+        
+        return section
+    }
+        
+    func generateSharedlbumsLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalWidth(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(220),
+            heightDimension: .absolute(150))
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
+        let spacing = CGFloat.spacing(.spacingXs)
+        group.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+        
+        let headerSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .estimated(44))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: "section-header-element-kind",
+            alignment: .top)
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.boundarySupplementaryItems = [sectionHeader]
+        section.orthogonalScrollingBehavior = .groupPaging
+        
+        return section
     }
 }

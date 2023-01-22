@@ -8,13 +8,13 @@
 import Foundation
 
 struct Episode: Mappable, Identifiable, Hashable {
-    public let id: Int
-    public let name: String
-    public let airDate: String
-    public let episode: String
-    public let characters: [String]
-    public let url: String
-    public let created: String
+    let id: Int
+    let name: String
+    let airDate: String
+    let episode: String
+    let characters: [String]
+    let url: String
+    let created: String
     
     enum CodingKeys: String, CodingKey {
         case id, name, episode, characters, url, created
@@ -27,5 +27,11 @@ struct Episode: Mappable, Identifiable, Hashable {
     
     static func == (lhs: Episode, rhs: Episode) -> Bool {
         return lhs.name == rhs.name
+    }
+}
+
+extension Episode {
+    func dto() -> CustomTextCellDTO {
+        return CustomTextCellDTO(title: name, subtitle: episode, description: airDate)
     }
 }

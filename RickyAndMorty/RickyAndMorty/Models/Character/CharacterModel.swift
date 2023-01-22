@@ -10,16 +10,16 @@ import Foundation
 struct CharacterModel: Codable, Identifiable, Hashable {
     public let id: Int
     public let name: String
-    public let status: String
-    public let species: String
-    public let type: String
-    public let gender: String
-    public let origin: CharacterOrigin
-    public let location: CharacterLocation
-    public let image: String
-    public let episode: [String]
-    public let url: String
-    public let created: String
+    let status: String
+    let species: String
+    let type: String
+    let gender: String
+    let origin: CharacterOrigin
+    let location: CharacterLocation
+    let image: String
+    let episode: [String]
+    let url: String
+    let created: String
     
     func hash(into hasher: inout Hasher) {
         return hasher.combine(id)
@@ -43,4 +43,11 @@ enum Gender: String {
    case genderless = "genderless"
    case unknown = "unknown"
    case none = ""
+}
+
+extension CharacterModel {
+    func dto() -> CharacterCellDTO {
+        return CharacterCellDTO(title: name, subtitle: "Status: \(status)", description: "Species: \(species)", iconURL: image)
+        
+    }
 }

@@ -8,13 +8,13 @@
 import Foundation
 
 struct Location: Mappable, Identifiable, Hashable {
-    public let id: Int
-    public let name: String
-    public let type: String
-    public let dimension: String
-    public let residents: [String]
-    public let url: String
-    public let created: String
+    let id: Int
+    let name: String
+    let type: String
+    let dimension: String
+    let residents: [String]
+    let url: String
+    let created: String
     
     func hash(into hasher: inout Hasher) {
         return hasher.combine(id)
@@ -22,5 +22,11 @@ struct Location: Mappable, Identifiable, Hashable {
     
     static func == (lhs: Location, rhs: Location) -> Bool {
         return lhs.name == rhs.name
+    }
+}
+
+extension Location {
+    func dto() -> CustomTextCellDTO {
+        return CustomTextCellDTO(title: name, subtitle: type, description: dimension)
     }
 }
