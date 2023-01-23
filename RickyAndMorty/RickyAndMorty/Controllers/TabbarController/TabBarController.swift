@@ -17,7 +17,7 @@ class TabBarController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        loadTabBar(viewControllers: [HomeControllerBuilder().build(), UIViewController()], tabs: [.home, .favorites])
+        loadTabBar(viewControllers: [HomeControllerBuilder().build(), SearchControllerBuilder().build()], tabs: [.home, .search])
     }
     
     func loadTabBar(viewControllers: [UIViewController], tabs: [TabBarItem]) {
@@ -39,7 +39,7 @@ class TabBarController: UITabBarController {
     func customizeTabBarItems() {
         //use this to reorder or add items to the tabbar
         //just make sure that in storyboard the order is respected
-        let icons: [TabBarItem] = [.home, .favorites]
+        let icons: [TabBarItem] = [.home, .search]
         
         for (index, icon) in icons.enumerated() {
             let tabBarIcon = self.tabBar.items?.object(index: index)

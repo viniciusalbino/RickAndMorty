@@ -76,5 +76,7 @@ class SectionHeader: UICollectionReusableView {
         titleLabel.text = title
         self.currentSection = section
         self.delegate = delegate
+        
+        button.isHidden = currentSection != .characters
     }
 }

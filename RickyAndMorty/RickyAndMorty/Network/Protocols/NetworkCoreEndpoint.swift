@@ -71,11 +71,10 @@ private extension NetworkCoreEndpoint {
     }
     
     private func urlWithParameters(_ parameters: [String: String]) -> URL? {
-        var requestURL = URLComponents()
-        requestURL.scheme = baseURL.scheme
-        requestURL.host = baseURL.host
-        requestURL.path = baseURL.path
-        requestURL.queryItems = parameters.compactMap { URLQueryItem(name: $0.key, value: $0.value) }
+        guard var requestURL = URLComponents(string: baseURL.absoluteString + path) else {
+            return nil
+        }
+        requestURL.queryItems = parameters.compactMap { URLQueryItem(name: $0.key, value: $0.value) } 
         return requestURL.url
     }
 }

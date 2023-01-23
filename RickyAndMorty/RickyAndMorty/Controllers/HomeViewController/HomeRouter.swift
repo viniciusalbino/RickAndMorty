@@ -14,7 +14,7 @@ final class HomeRouter: HomeRouterProtocol {
     
     // MARK: - Module setup -
     func loadCharactersController() {
-        let controller = UIViewController()
+        let controller = CharacterListControllerBuilder(firstFetch: true).build()
         DispatchQueue.main.async {
             self.viewController?.navigationController?.pushViewController(controller, animated: true)
         }

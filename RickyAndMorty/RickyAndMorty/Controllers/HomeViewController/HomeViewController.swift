@@ -43,7 +43,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func setup() {
-        title = "Ricky And Morty"
+        title = "Rick And Morty"
         view.backgroundColor = .designSystem(.secondaryColor)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
@@ -94,16 +94,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             return nil
         })
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//       if(self.collectionView.contentOffset.x >= (self.collectionView.contentSize.width - self.collectionView.bounds.size.width)) {
-//           if !isPageRefreshing {
-//               isPageRefreshing = true
-//               print(currentPage)
-//               currentPage = currentPage + 1
-//           }
-//       }
-//   }
 }
 
 // MARK: - Presenter output protocol

@@ -38,8 +38,8 @@ class CharacterRequest {
         }
     }
     
-    func getEpisodeByPage(id: Int) async -> Result<CharacterInfo, NetworkCoreErrorType> {
-        let response = await network.request(for: CharacterEndpoint.getbyPage(id))
+    func getWithParameters(dict: [String: String]) async -> Result<CharacterInfo, NetworkCoreErrorType> {
+        let response = await network.request(for: CharacterEndpoint.getWithParameters(dict))
         switch response.handler {
         case .success:
             if let data = response.data <--> CharacterInfo.self {
