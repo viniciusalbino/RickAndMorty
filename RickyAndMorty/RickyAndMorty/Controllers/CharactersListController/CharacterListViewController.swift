@@ -36,6 +36,7 @@ final class CharacterListViewController: UIViewController {
     }
     
     public func loadContent() {
+        startLoading()
         presenter.loadContent()
     }
     
@@ -81,18 +82,23 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.selectItemAt(indexPath.row)
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         guard collectionView.numberOfItems(inSection: 0) > 0, self.collectionView.contentOffset.y >= (self.collectionView.contentSize.height - self.collectionView.bounds.size.height), !isLoading else {
             return
         }
         isLoading = true
-        presenter.loadContent()
+        loadContent()
     }
 }
 
 // MARK: - Presenter output protocol
 extension CharacterListViewController: CharacterListPresenterOutputProtocol {
     func didFinishedLoadingContent(success: Bool) {
+        stopLoading()
         if success {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()

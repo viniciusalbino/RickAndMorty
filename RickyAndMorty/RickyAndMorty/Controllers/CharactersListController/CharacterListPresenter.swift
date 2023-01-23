@@ -66,6 +66,13 @@ extension CharacterListPresenter: CharacterListPresenterInputProtocol {
     func itemForRowAt(_ row: Int) -> CharacterModel? {
         return content.object(index: row)
     }
+    
+    func selectItemAt(_ row: Int) {
+        guard let content = content.object(index: row) else {
+            return
+        }
+        router.loadCharacterDetailController(content: content)
+    }
 }
 
 // MARK: - Presenter Output Protocol

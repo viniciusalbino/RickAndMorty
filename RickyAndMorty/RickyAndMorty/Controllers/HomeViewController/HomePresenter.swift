@@ -52,14 +52,23 @@ extension HomePresenter: HomePresenterInputProtocol {
         case .characters:
             router.loadCharactersController()
         case .episodes:
-            router.loadEpisodesController()
+            break
         case .locations:
-            router.loadLocationsController()
+            break
         }
     }
     
-    func loadDetailController() {
-        
+    func selectItemAt(_ indexPath: IndexPath) {
+        let section = Section(rawValue: indexPath.section)
+        switch section {
+        case .characters:
+            guard let content = characters.object(index: indexPath.row) else {
+                return
+            }
+            router.loadCharacterDetailController(content: content)
+        default:
+            break
+        }
     }
 }
 

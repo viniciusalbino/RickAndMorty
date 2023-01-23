@@ -25,18 +25,21 @@ class NavigationController: UINavigationController {
     
     internal func consistToTheme() {
         let buttonAppearance = UIBarButtonItemAppearance()
-        let attributes = [NSAttributedString.Key.foregroundColor : UIColor.designSystem(.textSecondaryColor)]
+        let attributes = [NSAttributedString.Key.foregroundColor : UIColor.designSystem(.textPrimaryColor)]
         buttonAppearance.normal.titleTextAttributes = attributes
         buttonAppearance.highlighted.titleTextAttributes = attributes
         
         let appearance = UINavigationBarAppearance()
         appearance.configureWithOpaqueBackground()
         appearance.backgroundColor = .designSystem(.primaryColor)
-        appearance.titleTextAttributes = [.foregroundColor: UIColor.designSystem(.textSecondaryColor)]
+        let image = UIImage(systemName: "chevron.backward")?.withTintColor(.white, renderingMode: .alwaysOriginal)
+        appearance.setBackIndicatorImage(image, transitionMaskImage: image)
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.designSystem(.textPrimaryColor)]
         appearance.buttonAppearance = buttonAppearance
+        appearance.backButtonAppearance = buttonAppearance
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
         
-        UINavigationBar.appearance().tintColor = UIColor.designSystem(.textSecondaryColor)
+        UINavigationBar.appearance().tintColor = UIColor.designSystem(.textPrimaryColor)
     }
 }

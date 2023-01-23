@@ -14,7 +14,13 @@ final class CharacterListRouter {
 }
 
 extension CharacterListRouter: CharacterListRouterProtocol {
-    func loadCharacterDetailController() {
-        
+    func loadCharacterDetailController(content: CharacterModel) {
+        guard let navigationController = TabBarController.sharedInstance?.selectedViewController?.children.first?.navigationController else {
+            return
+        }
+        let controller = CharacterDetailControllerBuilder(content: content).build()
+        DispatchQueue.main.async {
+            navigationController.pushViewController(controller, animated: true)
+        }
     }
 }

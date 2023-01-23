@@ -18,6 +18,7 @@ protocol CharacterListPresenterInputProtocol: AnyObject {
     func setContent(content: CharacterInfo?)
     func numberOfItensInSection() -> Int
     func itemForRowAt(_ row: Int) -> CharacterModel?
+    func selectItemAt(_ row: Int)
 }
 
 // MARK: - Interactor
@@ -31,6 +32,6 @@ protocol CharacterListInteractorOutputProtocol: AnyObject {
 
 // MARK: - Router
 protocol CharacterListRouterProtocol: AnyObject {
-    func loadCharacterDetailController()
+    func loadCharacterDetailController(content: CharacterModel)
 }
 

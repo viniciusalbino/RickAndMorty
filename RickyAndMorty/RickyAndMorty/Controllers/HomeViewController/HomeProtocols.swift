@@ -17,6 +17,7 @@ protocol HomePresenterOutputProtocol: AnyObject {
 protocol HomePresenterInputProtocol: AnyObject {
     func loadContent()
     func loadSectionController(section: Section)
+    func selectItemAt(_ indexPath: IndexPath)
 }
 
 // MARK: - Interactor
@@ -34,13 +35,5 @@ protocol HomeInteractorOutputProtocol: AnyObject {
 protocol HomeRouterProtocol: AnyObject {
     func loadCharactersController()
     
-    func loadEpisodesController()
-    
-    func loadLocationsController()
-    
-    func loadCharacterDetailController()
-    
-    func loadEpisodeDetailController()
-    
-    func loadLocationDetailController() 
+    func loadCharacterDetailController(content: CharacterModel)
 }
