@@ -28,6 +28,14 @@ struct CharacterModel: Codable, Identifiable, Hashable {
     static func == (lhs: CharacterModel, rhs: CharacterModel) -> Bool {
         return lhs.name == rhs.name
     }
+    
+    func toData() -> Data? {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(self) {
+            return encoded
+        }
+        return nil
+    }
 }
 
 enum Status: String {

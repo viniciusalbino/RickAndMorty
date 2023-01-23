@@ -19,7 +19,7 @@ final class CharacterDetailControllerBuilder: ViewControllerBuilder {
         let router = CharacterDetailRouter()
         let interactor = CharacterDetailInteractor()
         let presenter = CharacterDetailPresenter(router: router, interactor: interactor)
-        presenter.content = self.content
+        presenter.setContent(data: self.content)
         interactor.output = presenter
         let viewController = CharacterDetailViewController(presenter: presenter)
         presenter.viewController = viewController

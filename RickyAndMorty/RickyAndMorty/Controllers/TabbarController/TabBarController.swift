@@ -11,7 +11,7 @@ import UIKit
 class TabBarController: UITabBarController {
     
     static var sharedInstance: TabBarController? {
-        let window = UIApplication.shared.connectedScenes.compactMap { ($0 as? UIWindowScene)?.keyWindow }.first
+        let window = UIApplication.shared.currentWindow
         return window?.rootViewController as? TabBarController
     }
     

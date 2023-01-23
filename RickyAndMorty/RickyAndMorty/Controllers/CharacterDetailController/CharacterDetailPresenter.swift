@@ -14,12 +14,17 @@ final class CharacterDetailPresenter {
     private let interactor: CharacterDetailInteractorInputProtocol
     
     // MARK: - Properties
-    public var content: CharacterModel?
+    private var content: CharacterModel?
+    private var isFavorite: Bool = false
     
     // MARK: - init
     init(router: CharacterDetailRouterProtocol, interactor: CharacterDetailInteractorInputProtocol) {
         self.router = router
         self.interactor = interactor
+    }
+    
+    public func setContent(data: CharacterModel) {
+        self.content = data
     }
 }
 
@@ -47,9 +52,39 @@ extension CharacterDetailPresenter: CharacterDetailPresenterInputProtocol {
     func getGender() -> String {
         return content?.gender ?? ""
     }
+    
+    func checkFavorite() {
+        if let data = content {
+            interactor.checkFavorite(item: data)
+        }
+    }
+    
+    func addFavorite() {
+        guard let data = content else {
+            return
+        }
+        if isFavorite {
+            interactor.removeFavorite(item: data)
+        } else {
+            interactor.addFavorite(item: data)
+        }
+    }
 }
 
 // MARK: - Presenter Output Protocol
 extension CharacterDetailPresenter: CharacterDetailInteractorOutputProtocol {
+    func isFavorite(isFav: Bool) {
+        isFavorite = isFav
+        viewController?.didCheckedFavorite(isFav: isFavorite)
+    }
     
+    func addedFavorite() {
+        isFavorite = true
+        viewController?.didCheckedFavorite(isFav: isFavorite)
+    }
+    
+    func removedFavorite() {
+        isFavorite = false
+        viewController?.didCheckedFavorite(isFav: isFavorite)
+    }
 }

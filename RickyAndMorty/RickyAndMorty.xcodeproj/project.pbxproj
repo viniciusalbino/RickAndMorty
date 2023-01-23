@@ -12,6 +12,12 @@
 		142F56E45A85855EE6AE2BAB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20022459037253245BB36C67 /* AppDelegate.swift */; };
 		1ED3B0CDA9DC880174EB4969 /* NetworkCoreRequestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE4CAAFD32C21AACF90CA3A3 /* NetworkCoreRequestable.swift */; };
 		1F046B2FCC3B6499567153DE /* Properties.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6D66E713D380DA322B6265 /* Properties.swift */; };
+		2C614CBD297ED61D00DA451A /* UserDefaultsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614CBC297ED61D00DA451A /* UserDefaultsManager.swift */; };
+		2C614CBF297ED70F00DA451A /* FavoritesPersister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614CBE297ED70F00DA451A /* FavoritesPersister.swift */; };
+		2C614CC3297EF00E00DA451A /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614CC2297EF00E00DA451A /* UIApplication+Extensions.swift */; };
+		2C614CC6297EF36B00DA451A /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614CC5297EF36B00DA451A /* LoadingView.swift */; };
+		2C614CC8297EF38D00DA451A /* LoadingExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614CC7297EF38D00DA451A /* LoadingExtension.swift */; };
+		2C614CCA297EF3B800DA451A /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614CC9297EF3B800DA451A /* UIViewController+Extensions.swift */; };
 		2CB799A5297B11C200CB8B4B /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB799A4297B11C200CB8B4B /* String+Localized.swift */; };
 		2CB799A7297B11DB00CB8B4B /* Array+Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB799A6297B11DB00CB8B4B /* Array+Object.swift */; };
 		2CB799A9297B11FA00CB8B4B /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB799A8297B11FA00CB8B4B /* UIColor+Extensions.swift */; };
@@ -117,6 +123,12 @@
 		1B3E8E1B0C77B51A2CFA5365 /* RickyAndMortyTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = RickyAndMortyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20022459037253245BB36C67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		28611B87F99EC73984538D9B /* DesignTokenObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignTokenObject.swift; sourceTree = "<group>"; };
+		2C614CBC297ED61D00DA451A /* UserDefaultsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsManager.swift; sourceTree = "<group>"; };
+		2C614CBE297ED70F00DA451A /* FavoritesPersister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPersister.swift; sourceTree = "<group>"; };
+		2C614CC2297EF00E00DA451A /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		2C614CC5297EF36B00DA451A /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		2C614CC7297EF38D00DA451A /* LoadingExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingExtension.swift; sourceTree = "<group>"; };
+		2C614CC9297EF3B800DA451A /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		2CB799A4297B11C200CB8B4B /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		2CB799A6297B11DB00CB8B4B /* Array+Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Object.swift"; sourceTree = "<group>"; };
 		2CB799A8297B11FA00CB8B4B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -269,6 +281,24 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		2C614CBB297ED5FF00DA451A /* LocalData */ = {
+			isa = PBXGroup;
+			children = (
+				2C614CBC297ED61D00DA451A /* UserDefaultsManager.swift */,
+				2C614CBE297ED70F00DA451A /* FavoritesPersister.swift */,
+			);
+			path = LocalData;
+			sourceTree = "<group>";
+		};
+		2C614CC4297EF35B00DA451A /* LoadingController */ = {
+			isa = PBXGroup;
+			children = (
+				2C614CC5297EF36B00DA451A /* LoadingView.swift */,
+				2C614CC7297EF38D00DA451A /* LoadingExtension.swift */,
+			);
+			path = LoadingController;
+			sourceTree = "<group>";
+		};
 		2CB799AC297B130B00CB8B4B /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +330,7 @@
 		2CB799B4297B14E200CB8B4B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2C614CC4297EF35B00DA451A /* LoadingController */,
 				2CF3FDE7297E25450052D3D6 /* CharacterDetailController */,
 				2CF3FDD8297DB9AA0052D3D6 /* SearchController */,
 				2CF3FDCA297DA2B80052D3D6 /* CharactersListController */,
@@ -455,6 +486,8 @@
 				2CF3FDC4297D7E8F0052D3D6 /* UICollectionViewCell+Extensions.swift */,
 				2CF3FDC6297D7F2C0052D3D6 /* UILabel+Extensions.swift */,
 				2CBC754C297E344700A1E133 /* UIStackView+Extensions.swift */,
+				2C614CC2297EF00E00DA451A /* UIApplication+Extensions.swift */,
+				2C614CC9297EF3B800DA451A /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -484,6 +517,7 @@
 		46220A8FD801D3F600ADFC8D /* RickyAndMorty */ = {
 			isa = PBXGroup;
 			children = (
+				2C614CBB297ED5FF00DA451A /* LocalData */,
 				2CB799B4297B14E200CB8B4B /* Controllers */,
 				6A05BDB094C2B9D674B55F9D /* Assets */,
 				425BE6273BDEECB5DF0C5CC5 /* DesignSystem */,
@@ -709,6 +743,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C614CCA297EF3B800DA451A /* UIViewController+Extensions.swift in Sources */,
 				2CB799A7297B11DB00CB8B4B /* Array+Object.swift in Sources */,
 				2CF3FDEB297E256D0052D3D6 /* CharacterDetailPresenter.swift in Sources */,
 				142F56E45A85855EE6AE2BAB /* AppDelegate.swift in Sources */,
@@ -724,6 +759,8 @@
 				2CB799B7297B160D00CB8B4B /* TabBarItem.swift in Sources */,
 				2CF3FDD0297DA3750052D3D6 /* CharacterListInteractor.swift in Sources */,
 				2CB799E0297C7B2400CB8B4B /* HomePresenter.swift in Sources */,
+				2C614CBF297ED70F00DA451A /* FavoritesPersister.swift in Sources */,
+				2C614CC3297EF00E00DA451A /* UIApplication+Extensions.swift in Sources */,
 				A20E95212995841A6F5A08AE /* DSColor.swift in Sources */,
 				2CB799E9297CD59100CB8B4B /* CharacterCell.swift in Sources */,
 				2CB799E2297C7B3B00CB8B4B /* HomeProtocols.swift in Sources */,
@@ -752,6 +789,7 @@
 				EB17B8EA78EB3CE0A02E1BED /* NetworkCore.swift in Sources */,
 				2CF3FDDE297DF9540052D3D6 /* SearchInteractor.swift in Sources */,
 				2CF3FDE6297DFFDE0052D3D6 /* CharacterSearchDTO.swift in Sources */,
+				2C614CC8297EF38D00DA451A /* LoadingExtension.swift in Sources */,
 				9F8D0F4C7519F7D09D234A3E /* NetworkCoreConfiguration.swift in Sources */,
 				E9CEFCD35FC233F692A32B2D /* NetworkCoreEndpoint.swift in Sources */,
 				D2C7DEDCAB045F21ED610E7D /* NetworkCoreHandler.swift in Sources */,
@@ -761,6 +799,7 @@
 				2CF3FDDA297DF8960052D3D6 /* SearchViewController.swift in Sources */,
 				A37AF3634C081C57EBD922BB /* NetworkCoreMethod.swift in Sources */,
 				2CF3FDC5297D7E8F0052D3D6 /* UICollectionViewCell+Extensions.swift in Sources */,
+				2C614CBD297ED61D00DA451A /* UserDefaultsManager.swift in Sources */,
 				2CB799E6297C7C8400CB8B4B /* HomeRouter.swift in Sources */,
 				2CB799AB297B121400CB8B4B /* NumberFormatter+Extensions.swift in Sources */,
 				2CF3FDC1297D7CEB0052D3D6 /* CustomTextCell.swift in Sources */,
@@ -790,6 +829,7 @@
 				BFA8EC0B254A052F2E6B5F04 /* TokenCategory.swift in Sources */,
 				2CB799CF297C60AA00CB8B4B /* EpisodesEndpoint.swift in Sources */,
 				B530BDEFB63DC05CBC7BA421 /* TokenManager.swift in Sources */,
+				2C614CC6297EF36B00DA451A /* LoadingView.swift in Sources */,
 				5C1D05738EF69B893041DD2C /* TokenParser.swift in Sources */,
 				2CB799AF297B134500CB8B4B /* PrimaryButton.swift in Sources */,
 				2CB799DE297C790C00CB8B4B /* SectionHeader.swift in Sources */,

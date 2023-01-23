@@ -39,6 +39,11 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         setup()
         configureDataSource()
         configureHeader()
+        loadContent()
+    }
+    
+    private func loadContent() {
+        startLoading()
         presenter.loadContent()
     }
     
@@ -104,6 +109,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
 extension HomeViewController: HomePresenterOutputProtocol {
     func handle(payload: NSDiffableDataSourceSnapshot<Section, AnyHashable>) {
         currentSnapshot = payload
+//        stopLoading()
         guard let snapShot = currentSnapshot else{
             return
         }

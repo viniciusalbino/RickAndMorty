@@ -15,8 +15,7 @@ final class CharacterListRouter {
 
 extension CharacterListRouter: CharacterListRouterProtocol {
     func loadCharacterDetailController(content: CharacterModel) {
-        
-        guard let navigationController = viewController?.navigationController else {
+        guard let navigationController = TabBarController.sharedInstance?.selectedViewController?.children.first?.navigationController else {
             return
         }
         let controller = CharacterDetailControllerBuilder(content: content).build()

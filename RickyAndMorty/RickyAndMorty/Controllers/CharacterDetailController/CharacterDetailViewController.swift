@@ -13,12 +13,13 @@ final class CharacterDetailViewController: UIViewController {
     private let presenter: CharacterDetailPresenterInputProtocol
     
     // MARK: - Private Properties
-    var stackView: UIStackView = UIStackView(frame: .zero)
-    var headerImage: UIImageView = UIImageView(frame: .zero)
-    var nameLabel: UILabel = UILabel(frame: .zero)
-    var statusLabel: UILabel = UILabel(frame: .zero)
-    var locationLabel: UILabel = UILabel(frame: .zero)
-    var episodeLabel: UILabel = UILabel(frame: .zero)
+    private var stackView: UIStackView = UIStackView(frame: .zero)
+    private var headerImage: UIImageView = UIImageView(frame: .zero)
+    private var nameLabel: UILabel = UILabel(frame: .zero)
+    private var statusLabel: UILabel = UILabel(frame: .zero)
+    private var locationLabel: UILabel = UILabel(frame: .zero)
+    private var episodeLabel: UILabel = UILabel(frame: .zero)
+    private var favButton: UIBarButtonItem!
     
     // MARK: - Init
     
@@ -35,6 +36,8 @@ final class CharacterDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        loadContent()
+        checkFav()
     }
     
     private func setup() {
@@ -88,8 +91,12 @@ final class CharacterDetailViewController: UIViewController {
         episodeLabel.translatesAutoresizingMaskIntoConstraints = false
         stackView.addArrangedSubview(episodeLabel)
         
+        favButton = UIBarButtonItem(title: "".localized(), style: .plain, target: self, action: #selector(addFav))
+        navigationItem.rightBarButtonItem = favButton
+        favButton.isEnabled = false
+        favButton.tintColor = .designSystem(.textPrimaryColor)
+        
         setupConstraints()
-        loadContent()
     }
     
     private func setupConstraints() {
@@ -122,9 +129,23 @@ final class CharacterDetailViewController: UIViewController {
         
         stackView.addHorizontalSeparators(color: UIColor.designSystem(.textPrimaryColor))
     }
+    
+    @objc private func addFav() {
+        presenter.addFavorite()
+    }
+    
+    private func checkFav() {
+        presenter.checkFavorite()
+    }
 }
 
 // MARK: - Presenter output protocol
 extension CharacterDetailViewController: CharacterDetailPresenterOutputProtocol {
-    
+    func didCheckedFavorite(isFav: Bool) {
+        let title = isFav ? "Remove".localized() : "Add Favorite".localized()
+        DispatchQueue.main.async {
+            self.favButton.title = title
+            self.favButton.isEnabled = true
+        }
+    }
 }

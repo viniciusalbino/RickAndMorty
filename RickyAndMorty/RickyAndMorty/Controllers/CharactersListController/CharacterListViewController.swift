@@ -36,6 +36,7 @@ final class CharacterListViewController: UIViewController {
     }
     
     public func loadContent() {
+        startLoading()
         presenter.loadContent()
     }
     
@@ -90,13 +91,14 @@ extension CharacterListViewController: UICollectionViewDelegate, UICollectionVie
             return
         }
         isLoading = true
-        presenter.loadContent()
+        loadContent()
     }
 }
 
 // MARK: - Presenter output protocol
 extension CharacterListViewController: CharacterListPresenterOutputProtocol {
     func didFinishedLoadingContent(success: Bool) {
+        stopLoading()
         if success {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
