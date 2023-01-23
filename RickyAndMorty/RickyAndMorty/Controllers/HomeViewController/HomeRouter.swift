@@ -20,23 +20,13 @@ final class HomeRouter: HomeRouterProtocol {
         }
     }
     
-    func loadEpisodesController() {
-        
-    }
-    
-    func loadLocationsController() {
-        
-    }
-    
-    func loadCharacterDetailController() {
-        
-    }
-    
-    func loadEpisodeDetailController() {
-        
-    }
-    
-    func loadLocationDetailController() {
-        
+    func loadCharacterDetailController(content: CharacterModel) {
+        guard let navigationController = viewController?.navigationController else {
+            return
+        }
+        let controller = CharacterDetailControllerBuilder(content: content).build()
+        DispatchQueue.main.async {
+            navigationController.pushViewController(controller, animated: true)
+        }
     }
 }

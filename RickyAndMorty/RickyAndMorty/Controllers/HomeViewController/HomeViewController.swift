@@ -43,7 +43,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func setup() {
-        title = "Rick And Morty"
+        title = "Home".localized()
         view.backgroundColor = .designSystem(.secondaryColor)
         
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
@@ -93,6 +93,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
             }
             return nil
         })
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.selectItemAt(indexPath)
     }
 }
 
