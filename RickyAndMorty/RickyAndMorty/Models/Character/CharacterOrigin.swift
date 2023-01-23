@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CharacterOrigin: Codable {
+public struct CharacterOrigin: Mappable {
     let name: String
     let url: String
 }

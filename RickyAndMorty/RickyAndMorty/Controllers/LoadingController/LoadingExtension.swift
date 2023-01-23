@@ -12,7 +12,7 @@ extension UIViewController {
     public func startLoading() {
         if let currentWindow = UIApplication.shared.currentWindow {
             let loadingBackground = LoadingView(frame: .zero)
-            currentWindow.addSubview(loadingBackground)
+            loadingBackground.pinToBounds(of: currentWindow)
             currentWindow.isUserInteractionEnabled = false
             loadingBackground.startLoading()
         }
@@ -22,7 +22,7 @@ extension UIViewController {
         // swiftlint:disable closure_spacing
         performUIUpdate {
             if let currentWindow = UIApplication.shared.currentWindow {
-                currentWindow.window?.subviews.filter{ $0 is LoadingView }.forEach{ $0.removeFromSuperview() }
+                currentWindow.subviews.filter{ $0 is LoadingView }.forEach{ $0.removeFromSuperview() }
                 currentWindow.isUserInteractionEnabled = true
             }
         }

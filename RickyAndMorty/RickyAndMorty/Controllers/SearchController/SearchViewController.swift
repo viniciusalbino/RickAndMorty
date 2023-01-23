@@ -64,7 +64,7 @@ final class SearchViewController: UIViewController, UISearchResultsUpdating {
 // MARK: - Presenter output protocol
 extension SearchViewController: SearchPresenterOutputProtocol {
     func didFinishedLoadingContent(result: CharacterInfo?) {
-        DispatchQueue.main.async {
+        performUIUpdate {
             if let controller = self.searchController.searchResultsController as? CharacterListViewController {
                 controller.reloadContent(content: result)
             }

@@ -100,7 +100,7 @@ extension CharacterListViewController: CharacterListPresenterOutputProtocol {
     func didFinishedLoadingContent(success: Bool) {
         stopLoading()
         if success {
-            DispatchQueue.main.async {
+            performUIUpdate {
                 self.collectionView.reloadData()
             }
         }

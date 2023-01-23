@@ -22,7 +22,7 @@ extension CharacterDetailInteractor: CharacterDetailInteractorInputProtocol {
     }
     
     func addFavorite(item: CharacterModel) {
-        _ = persister.addFavorite(item: item)
+        persister.addFavorite(item: item)
         output?.addedFavorite()
     }
     

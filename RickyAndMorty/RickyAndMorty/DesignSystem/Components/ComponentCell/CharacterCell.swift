@@ -101,10 +101,3 @@ final class CharacterCell: UICollectionViewCell {
         }, placeholderImage: nil)
     }
 }
-
-struct CharacterCellDTO {
-    var title: String
-    var subtitle: String
-    var description: String
-    var iconURL: String?
-}

@@ -143,7 +143,7 @@ final class CharacterDetailViewController: UIViewController {
 extension CharacterDetailViewController: CharacterDetailPresenterOutputProtocol {
     func didCheckedFavorite(isFav: Bool) {
         let title = isFav ? "Remove".localized() : "Add Favorite".localized()
-        DispatchQueue.main.async {
+        performUIUpdate {
             self.favButton.title = title
             self.favButton.isEnabled = true
         }

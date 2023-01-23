@@ -43,7 +43,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func loadContent() {
-        startLoading()
+        performUIUpdate {
+            self.startLoading()
+        }
         presenter.loadContent()
     }
     
@@ -109,7 +111,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
 extension HomeViewController: HomePresenterOutputProtocol {
     func handle(payload: NSDiffableDataSourceSnapshot<Section, AnyHashable>) {
         currentSnapshot = payload
-//        stopLoading()
+        performUIUpdate {
+            self.stopLoading()
+        }
         guard let snapShot = currentSnapshot else{
             return
         }
@@ -145,6 +149,7 @@ extension HomeViewController {
             widthDimension: .absolute(150),
             heightDimension: .absolute(220))
         let spacing = CGFloat.spacing(.spacingXs)
+        
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
         group.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
         

@@ -10,7 +10,7 @@ import UIKit
 
 class LoadingView: UIView {
     private var loading: UIActivityIndicatorView = UIActivityIndicatorView(frame: .zero)
-    
+    private var blurView: UIVisualEffectView!
     public override init(frame: CGRect) {
          super.init(frame: frame)
         setupView()
@@ -22,7 +22,16 @@ class LoadingView: UIView {
      }
     
     private func setupView() {
-         addSubview(loading)
+        frame = bounds
+        autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        translatesAutoresizingMaskIntoConstraints = true
+        
+        let blurEffect = UIBlurEffect(style: .extraLight)
+        blurView = UIVisualEffectView(effect: blurEffect)
+        blurView.translatesAutoresizingMaskIntoConstraints = false
+        blurView.pinToBounds(of: self)
+        
+        addSubview(loading)
         loading.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             loading.centerYAnchor.constraint(equalTo: centerYAnchor),

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CharacterModel: Codable, Identifiable, Hashable {
+struct CharacterModel: Mappable, Identifiable, Hashable {
     public let id: Int
     public let name: String
     let status: String
@@ -38,14 +38,14 @@ struct CharacterModel: Codable, Identifiable, Hashable {
     }
 }
 
-enum Status: String {
+enum Status: String, Mappable {
    case alive = "alive"
    case dead = "dead"
    case unknown = "unknown"
    case none = ""
 }
 
-enum Gender: String {
+enum Gender: String, Mappable {
    case female = "female"
    case male = "male"
    case genderless = "genderless"
@@ -53,9 +53,15 @@ enum Gender: String {
    case none = ""
 }
 
+struct CharacterCellDTO {
+    var title: String
+    var subtitle: String
+    var description: String
+    var iconURL: String?
+}
+
 extension CharacterModel {
     func dto() -> CharacterCellDTO {
         return CharacterCellDTO(title: name, subtitle: "Status: \(status)", description: "Species: \(species)", iconURL: image)
-        
     }
 }

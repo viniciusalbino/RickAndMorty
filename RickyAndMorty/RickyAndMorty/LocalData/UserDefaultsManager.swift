@@ -22,7 +22,7 @@ class UserDefaultsManager: NSObject {
     
     
     private override init() {
-        userDefaults = UserDefaults.standard
+        userDefaults = UserDefaults(suiteName: "group.RickyAndMorty")
     }
     
     func remove(for key: UserDefaultType) {
