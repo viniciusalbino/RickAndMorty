@@ -1,20 +1,20 @@
 //
-//  CharacterRequest.swift
+//  EpisodeRequest.swift
 //  RickyAndMorty
 //
-//  Created by Vinicius Albino on 20/01/23.
+//  Created by Vinicius Albino on 21/01/23.
 //
 
 import Foundation
 
-class CharacterRequest {
+class EpisodesRequest {
     var network = NetworkCore.defaultNetwork
     
-    func getAllCharacters() async -> Result<CharacterInfo, NetworkCoreErrorType> {
-        let response = await network.request(for: CharacterEndpoint.getAll)
+    func getAllEpisodes() async -> Result<EpisodesInfo, NetworkCoreErrorType> {
+        let response = await network.request(for: EpisodesEndpoint.getAll)
         switch response.handler {
         case .success:
-            if let data = response.data <--> CharacterInfo.self {
+            if let data = response.data <--> EpisodesInfo.self {
                 return .success(data)
             } else {
                 return .failure(.businessError)
@@ -24,11 +24,11 @@ class CharacterRequest {
         }
     }
     
-    func getCharacterByID(id: Int) async -> Result<CharacterModel, NetworkCoreErrorType> {
-        let response = await network.request(for: CharacterEndpoint.getById(id))
+    func getEpisodesByID(id: Int) async -> Result<Episode, NetworkCoreErrorType> {
+        let response = await network.request(for: EpisodesEndpoint.getById(id))
         switch response.handler {
         case .success:
-            if let data = response.data <--> CharacterModel.self {
+            if let data = response.data <--> Episode.self {
                 return .success(data)
             } else {
                 return .failure(.businessError)
@@ -38,11 +38,11 @@ class CharacterRequest {
         }
     }
     
-    func getWithParameters(dict: [String: String]) async -> Result<CharacterInfo, NetworkCoreErrorType> {
-        let response = await network.request(for: CharacterEndpoint.getWithParameters(dict))
+    func getEpisodeByPage(id: Int) async -> Result<EpisodesInfo, NetworkCoreErrorType> {
+        let response = await network.request(for: EpisodesEndpoint.getbyPage(id))
         switch response.handler {
         case .success:
-            if let data = response.data <--> CharacterInfo.self {
+            if let data = response.data <--> EpisodesInfo.self {
                 return .success(data)
             } else {
                 return .failure(.businessError)

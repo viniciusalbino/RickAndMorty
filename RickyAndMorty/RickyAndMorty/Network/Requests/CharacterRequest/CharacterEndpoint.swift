@@ -9,24 +9,24 @@ import Foundation
 
 enum CharacterEndpoint {
     case getById(Int)
-    case getByURL(String)
     case getAll
+    case getWithParameters([String: String])
 }
 
 extension CharacterEndpoint: NetworkCoreEndpoint {    
     var path: String {
-        switch self {
-        case .getById(let id):
-            return "\(id)"
-        case .getByURL(let url):
-            return "\(url)"
-        case .getAll:
-            return "character"
-        }
+        return "character/"
     }
     
     var task: NetworkCoreTask {
-        return .requestPlain
+        switch self {
+        case .getById(let id):
+            return .requestParameters(parameters: ["id": "\(id)"])
+        case .getAll:
+            return .requestPlain
+        case .getWithParameters(let dict):
+            return .requestParameters(parameters: dict)
+        }
     }
     
     var method: NetworkCoreMethod {

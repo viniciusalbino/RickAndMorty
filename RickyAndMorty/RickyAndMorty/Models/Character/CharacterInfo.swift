@@ -9,6 +9,6 @@ import Foundation
 
 struct CharacterInfo: Codable {
     let info: Info
+    var filterApplyed: [String: String]?
     let results: [CharacterModel]
 }
-

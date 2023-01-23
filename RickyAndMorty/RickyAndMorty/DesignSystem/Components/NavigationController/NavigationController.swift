@@ -36,5 +36,7 @@ class NavigationController: UINavigationController {
         appearance.buttonAppearance = buttonAppearance
         navigationBar.standardAppearance = appearance
         navigationBar.scrollEdgeAppearance = appearance
+        
+        UINavigationBar.appearance().tintColor = UIColor.designSystem(.textSecondaryColor)
     }
 }

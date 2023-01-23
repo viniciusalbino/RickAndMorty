@@ -10,14 +10,14 @@ import UIKit
 
 enum TabBarItem: Int {
     case home = 0
-    case favorites = 1
+    case search = 1
     
     var title: String {
         switch self {
         case .home:
             return "Home".localized()
-        case .favorites:
-            return "Favoritos".localized()
+        case .search:
+            return "Search".localized()
         }
     }
     
@@ -25,8 +25,8 @@ enum TabBarItem: Int {
         switch self {
         case .home:
             return UIImage(systemName: "circle.grid.3x3.circle")!
-        case .favorites:
-            return UIImage(systemName: "star")!
+        case .search:
+            return UIImage(systemName: "magnifyingglass.circle")!
         }
     }
     

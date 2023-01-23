@@ -1,20 +1,20 @@
 //
-//  CharacterRequest.swift
+//  LocationRequest.swift
 //  RickyAndMorty
 //
-//  Created by Vinicius Albino on 20/01/23.
+//  Created by Vinicius Albino on 21/01/23.
 //
 
 import Foundation
 
-class CharacterRequest {
+class LocationsRequest {
     var network = NetworkCore.defaultNetwork
     
-    func getAllCharacters() async -> Result<CharacterInfo, NetworkCoreErrorType> {
-        let response = await network.request(for: CharacterEndpoint.getAll)
+    func getAllLocations() async -> Result<LocationsInfo, NetworkCoreErrorType> {
+        let response = await network.request(for: LocationsEndpoint.getAll)
         switch response.handler {
         case .success:
-            if let data = response.data <--> CharacterInfo.self {
+            if let data = response.data <--> LocationsInfo.self {
                 return .success(data)
             } else {
                 return .failure(.businessError)
@@ -24,11 +24,11 @@ class CharacterRequest {
         }
     }
     
-    func getCharacterByID(id: Int) async -> Result<CharacterModel, NetworkCoreErrorType> {
-        let response = await network.request(for: CharacterEndpoint.getById(id))
+    func getLocationByID(id: Int) async -> Result<Location, NetworkCoreErrorType> {
+        let response = await network.request(for: LocationsEndpoint.getById(id))
         switch response.handler {
         case .success:
-            if let data = response.data <--> CharacterModel.self {
+            if let data = response.data <--> Location.self {
                 return .success(data)
             } else {
                 return .failure(.businessError)
@@ -38,11 +38,11 @@ class CharacterRequest {
         }
     }
     
-    func getWithParameters(dict: [String: String]) async -> Result<CharacterInfo, NetworkCoreErrorType> {
-        let response = await network.request(for: CharacterEndpoint.getWithParameters(dict))
+    func getLocationByPage(id: Int) async -> Result<LocationsInfo, NetworkCoreErrorType> {
+        let response = await network.request(for: LocationsEndpoint.getbyPage(id))
         switch response.handler {
         case .success:
-            if let data = response.data <--> CharacterInfo.self {
+            if let data = response.data <--> LocationsInfo.self {
                 return .success(data)
             } else {
                 return .failure(.businessError)

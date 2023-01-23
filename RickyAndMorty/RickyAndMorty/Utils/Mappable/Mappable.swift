@@ -17,8 +17,14 @@ public func <--> <T: Codable>(jsonData: Data?, type: T.Type) -> T? {
         return nil
     }
     let decoder = JSONDecoder()
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
-    return try? decoder.decode(T.self, from: data)
+    decoder.keyDecodingStrategy = .useDefaultKeys
+    do {
+        return try decoder.decode(T.self, from: data)
+    } catch {
+        let string = String(data: data, encoding: .utf8)
+        print("error decoding \(error) - Data: \(String(describing: string))")
+        return nil
+    }
 }
 
 public func <--> <T:Codable>(jsonData: Data?, type: [T.Type]) -> [T]? {
@@ -27,6 +33,12 @@ public func <--> <T:Codable>(jsonData: Data?, type: [T.Type]) -> [T]? {
     }
     
     let decoder = JSONDecoder()
-    decoder.keyDecodingStrategy = .convertFromSnakeCase
-    return try? decoder.decode([T].self, from: data)
+    decoder.keyDecodingStrategy = .useDefaultKeys
+    do {
+        return try decoder.decode([T].self, from: data)
+    } catch {
+        let string = String(data: data, encoding: .utf8)
+        print("error decoding \(error) - Data: \(String(describing: string))")
+        return nil
+    }
 }
