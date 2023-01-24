@@ -2,7 +2,7 @@
 //  RickyAndMortyUITests.swift
 //  RickyAndMortyUITests
 //
-//  Created by Vinicius Albino on 19/01/23.
+//  Created by Vinicius Albino on 24/01/23.
 //
 
 import XCTest
@@ -28,6 +28,7 @@ final class RickyAndMortyUITests: XCTestCase {
         app.launch()
 
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
     }
 
     func testLaunchPerformance() throws {
