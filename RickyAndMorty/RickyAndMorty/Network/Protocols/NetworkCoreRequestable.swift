@@ -14,13 +14,5 @@ protocol NetworkCoreRequestable {
     
     var endpoint: NetworkCoreEndpoint { get }
     
-    func sendRequest<T: Decodable>(endpoint: NetworkCoreEndpoint, responseModel: T.Type) async -> Result<T, NetworkCoreErrorType>
-    
-    func cancel()
-}
-
-extension NetworkCoreRequestable {
-    func cancel() {
-//        network.cancel()
-    }
+    func request(completion: @escaping (Result<DataType, NetworkCoreErrorType>) -> Void)
 }

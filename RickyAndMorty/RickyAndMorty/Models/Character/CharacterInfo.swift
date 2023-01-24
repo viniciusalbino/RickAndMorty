@@ -11,4 +11,10 @@ struct CharacterInfo: Codable {
     let info: Info
     var filterApplyed: [String: String]?
     let results: [CharacterModel]
+    
+    init(info: Info, filterApplyed: [String : String]? = nil, results: [CharacterModel]) {
+        self.info = info
+        self.filterApplyed = filterApplyed
+        self.results = results
+    }
 }

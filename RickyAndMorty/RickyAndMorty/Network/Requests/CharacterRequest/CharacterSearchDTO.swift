@@ -14,3 +14,4 @@ struct CharacterSearchDTO {
         return ["name": name]
     }
 }
+ 

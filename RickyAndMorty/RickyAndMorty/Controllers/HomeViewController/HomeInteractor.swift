@@ -16,27 +16,48 @@ final class HomeInteractor {
 
 extension HomeInteractor: HomeInteractorInputProtocol {
     
-    func getCharacters() async -> CharacterInfo? {
-        let request = await CharacterRequest().getAllCharacters()
-        do {
-            let result = try? request.get() as CharacterInfo
-            return result
+    func getCharacters() {
+        let requestable = GetAllCharactersRequest()
+        requestable.request { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let data):
+                self.output?.didGetCharacters(data: data)
+            case .failure(let error):
+                self.output?.errorGettingCharacters(error: error)
+            }
         }
     }
     
-    func getEpisodes() async -> EpisodesInfo? {
-        let request = await EpisodesRequest().getAllEpisodes()
-        do {
-            let result = try? request.get() as EpisodesInfo
-            return result
+    func getEpisodes() {
+        let requestable = GetAllEpisodesRequest()
+        requestable.request { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let data):
+                self.output?.didGetEpisodes(data: data)
+            case .failure(let error):
+                self.output?.errorGettingEpisodes(error: error)
+            }
         }
     }
     
-    func getLocations() async -> LocationsInfo? {
-        let request = await LocationsRequest().getAllLocations()
-        do {
-            let result = try? request.get() as LocationsInfo
-            return result
+    func getLocations()  {
+        let requestable = GetAllLocationsRequest()
+        requestable.request { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let data):
+                self.output?.didGetLocations(data: data)
+            case .failure(let error):
+                self.output?.errorGettingLocations(error: error)
+            }
         }
     }
 }

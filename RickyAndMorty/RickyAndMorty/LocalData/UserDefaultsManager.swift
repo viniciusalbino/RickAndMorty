@@ -30,11 +30,10 @@ class UserDefaultsManager: NSObject {
     }
     
     func purge() {
-        let keys = UserDefaultType.allCases //UserDefaultsKeys.reteriveAllCases()
+        let keys = UserDefaultType.allCases
         keys.forEach {
             remove(for: $0)
         }
-        //KeyChainWrapper.share.deletePassword()
     }
 }
 

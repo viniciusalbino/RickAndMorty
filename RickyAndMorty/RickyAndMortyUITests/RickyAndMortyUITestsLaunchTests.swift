@@ -2,7 +2,7 @@
 //  RickyAndMortyUITestsLaunchTests.swift
 //  RickyAndMortyUITests
 //
-//  Created by Vinicius Albino on 19/01/23.
+//  Created by Vinicius Albino on 24/01/23.
 //
 
 import XCTest

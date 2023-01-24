@@ -14,8 +14,8 @@ enum NetworkCoreHandler {
     
     init(statusCode: Int) {
         switch NetworkCoreStatusCode(rawValue: statusCode) {
-        case .noContent, .unknow:
-            self = .error(.unknow)
+        case .noContent, .unknown:
+            self = .error(.unknown)
         case .noConnection:
             self = .error(.noConnection)
         case .statusOK:
@@ -25,9 +25,9 @@ enum NetworkCoreHandler {
         case .notFound:
             self = .error(.notFound)
         case .internalServerError:
-            self = .error(.unknow)
+            self = .error(.unknown)
         default:
-            self = .error(.unknow)
+            self = .error(.unknown)
         }
     }
 }
@@ -39,16 +39,18 @@ enum NetworkCoreErrorType: Int, Swift.Error {
     case serviceDown
     case cancelled
     case noConnection
-    case unknow
+    case unknown
+    case noContent
+    case `internal`
 }
 
 enum NetworkCoreStatusCode: Int {
     case noConnection = 0
-    case unknow = -998
-    
+    case unknown = -998
     case statusOK = 200
     case noContent = 204
     case badRequest = 400
     case notFound = 404
     case internalServerError = 500
+    case created = 201
 }

@@ -106,4 +106,8 @@ extension CharacterListViewController: CharacterListPresenterOutputProtocol {
         }
         isLoading = false
     }
+    
+    func failedLoadContent() {
+        
+    }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 // MARK: - ViewController
 protocol HomePresenterOutputProtocol: AnyObject {
-    func handle(payload: NSDiffableDataSourceSnapshot<Section, AnyHashable>)
+    func reloadData(data: [AnyHashable], section: Section)
 }
 
 // MARK: - Presenter
@@ -22,13 +22,20 @@ protocol HomePresenterInputProtocol: AnyObject {
 
 // MARK: - Interactor
 protocol HomeInteractorInputProtocol: AnyObject {
-    func getCharacters() async -> CharacterInfo?
-    func getEpisodes() async -> EpisodesInfo?
-    func getLocations() async -> LocationsInfo?
+    func getCharacters()
+    func getEpisodes()
+    func getLocations()
 }
 
 protocol HomeInteractorOutputProtocol: AnyObject {
+    func didGetCharacters(data: CharacterInfo?)
+    func errorGettingCharacters(error: Error)
     
+    func didGetEpisodes(data: EpisodesInfo?)
+    func errorGettingEpisodes(error: Error)
+    
+    func didGetLocations(data: LocationsInfo?)
+    func errorGettingLocations(error: Error?)
 }
 
 // MARK: - Router

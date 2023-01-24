@@ -19,7 +19,7 @@ final class CharacterListPresenter {
     private var content: [CharacterModel] = []
     private var info: CharacterInfo?
     private var currentFilter: [String: String]?
-    var currentPage: Int = 1
+    private var currentPage: Int = 1
     
     // MARK: - init
     init(router: CharacterListRouterProtocol, interactor: CharacterInteractorInputProtocol) {
@@ -77,6 +77,10 @@ extension CharacterListPresenter: CharacterListPresenterInputProtocol {
 
 // MARK: - Presenter Output Protocol
 extension CharacterListPresenter: CharacterListInteractorOutputProtocol {
+    func failedLoadContent() {
+        viewController?.failedLoadContent()
+    }
+    
     func didLoadContent(result: CharacterInfo?) {
         guard let result = result else {
             viewController?.didFinishedLoadingContent(success: false)
