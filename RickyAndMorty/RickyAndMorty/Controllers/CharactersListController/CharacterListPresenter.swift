@@ -77,6 +77,10 @@ extension CharacterListPresenter: CharacterListPresenterInputProtocol {
 
 // MARK: - Presenter Output Protocol
 extension CharacterListPresenter: CharacterListInteractorOutputProtocol {
+    func failedLoadContent() {
+        viewController?.failedLoadContent()
+    }
+    
     func didLoadContent(result: CharacterInfo?) {
         guard let result = result else {
             viewController?.didFinishedLoadingContent(success: false)

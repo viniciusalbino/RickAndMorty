@@ -52,6 +52,12 @@
 		2C614D222980268300DA451A /* CharacterListPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614D212980268300DA451A /* CharacterListPresenterTests.swift */; };
 		2C614D24298028B500DA451A /* CharacterList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C614D23298028B500DA451A /* CharacterList.json */; };
 		2C614D25298028F200DA451A /* CharacterList.json in Resources */ = {isa = PBXBuildFile; fileRef = 2C614D23298028B500DA451A /* CharacterList.json */; };
+		2C614D2829803A5B00DA451A /* CharacterInteractorInputProtocolSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614D2729803A5B00DA451A /* CharacterInteractorInputProtocolSpy.swift */; };
+		2C614D2A29803AEE00DA451A /* CharacterInteractorOutputProtocolSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614D2929803AEE00DA451A /* CharacterInteractorOutputProtocolSpy.swift */; };
+		2C614D2C29803BDC00DA451A /* CharacterListPresenterInputProtocolSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614D2B29803BDC00DA451A /* CharacterListPresenterInputProtocolSpy.swift */; };
+		2C614D2E29803CE100DA451A /* CharacterListPresenterOutputProtocolSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614D2D29803CE100DA451A /* CharacterListPresenterOutputProtocolSpy.swift */; };
+		2C614D3029803DB800DA451A /* CharacterListRouterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614D2F29803DB800DA451A /* CharacterListRouterSpy.swift */; };
+		2C614D3229803E7100DA451A /* CharacterInfoMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C614D3129803E7100DA451A /* CharacterInfoMock.swift */; };
 		2CB799A5297B11C200CB8B4B /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB799A4297B11C200CB8B4B /* String+Localized.swift */; };
 		2CB799A7297B11DB00CB8B4B /* Array+Object.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB799A6297B11DB00CB8B4B /* Array+Object.swift */; };
 		2CB799A9297B11FA00CB8B4B /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB799A8297B11FA00CB8B4B /* UIColor+Extensions.swift */; };
@@ -210,6 +216,12 @@
 		2C614D1F2980265000DA451A /* CharacterListControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListControllerTests.swift; sourceTree = "<group>"; };
 		2C614D212980268300DA451A /* CharacterListPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListPresenterTests.swift; sourceTree = "<group>"; };
 		2C614D23298028B500DA451A /* CharacterList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CharacterList.json; sourceTree = "<group>"; };
+		2C614D2729803A5B00DA451A /* CharacterInteractorInputProtocolSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterInteractorInputProtocolSpy.swift; sourceTree = "<group>"; };
+		2C614D2929803AEE00DA451A /* CharacterInteractorOutputProtocolSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterInteractorOutputProtocolSpy.swift; sourceTree = "<group>"; };
+		2C614D2B29803BDC00DA451A /* CharacterListPresenterInputProtocolSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListPresenterInputProtocolSpy.swift; sourceTree = "<group>"; };
+		2C614D2D29803CE100DA451A /* CharacterListPresenterOutputProtocolSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListPresenterOutputProtocolSpy.swift; sourceTree = "<group>"; };
+		2C614D2F29803DB800DA451A /* CharacterListRouterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListRouterSpy.swift; sourceTree = "<group>"; };
+		2C614D3129803E7100DA451A /* CharacterInfoMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterInfoMock.swift; sourceTree = "<group>"; };
 		2CB799A4297B11C200CB8B4B /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		2CB799A6297B11DB00CB8B4B /* Array+Object.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Object.swift"; sourceTree = "<group>"; };
 		2CB799A8297B11FA00CB8B4B /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
@@ -476,10 +488,24 @@
 		2C614D1E2980264000DA451A /* CharacterListControllerTests */ = {
 			isa = PBXGroup;
 			children = (
+				2C614D2629802E4300DA451A /* Spies */,
 				2C614D1F2980265000DA451A /* CharacterListControllerTests.swift */,
 				2C614D212980268300DA451A /* CharacterListPresenterTests.swift */,
 			);
 			path = CharacterListControllerTests;
+			sourceTree = "<group>";
+		};
+		2C614D2629802E4300DA451A /* Spies */ = {
+			isa = PBXGroup;
+			children = (
+				2C614D2729803A5B00DA451A /* CharacterInteractorInputProtocolSpy.swift */,
+				2C614D2929803AEE00DA451A /* CharacterInteractorOutputProtocolSpy.swift */,
+				2C614D2B29803BDC00DA451A /* CharacterListPresenterInputProtocolSpy.swift */,
+				2C614D2D29803CE100DA451A /* CharacterListPresenterOutputProtocolSpy.swift */,
+				2C614D2F29803DB800DA451A /* CharacterListRouterSpy.swift */,
+				2C614D3129803E7100DA451A /* CharacterInfoMock.swift */,
+			);
+			path = Spies;
 			sourceTree = "<group>";
 		};
 		2CB799AC297B130B00CB8B4B /* Components */ = {
@@ -1092,14 +1118,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C614D3229803E7100DA451A /* CharacterInfoMock.swift in Sources */,
 				2C614D12297F6FE200DA451A /* RequestableWithStatusCodeTests.swift in Sources */,
+				2C614D2A29803AEE00DA451A /* CharacterInteractorOutputProtocolSpy.swift in Sources */,
 				2C614D202980265000DA451A /* CharacterListControllerTests.swift in Sources */,
+				2C614D3029803DB800DA451A /* CharacterListRouterSpy.swift in Sources */,
 				2C614D10297F6E7F00DA451A /* Result+ExtensionsTests.swift in Sources */,
 				2C614D0A297F6B9B00DA451A /* UserMock.swift in Sources */,
+				2C614D2E29803CE100DA451A /* CharacterListPresenterOutputProtocolSpy.swift in Sources */,
+				2C614D2829803A5B00DA451A /* CharacterInteractorInputProtocolSpy.swift in Sources */,
 				2C614D16297F704800DA451A /* RequestableWithBodyTests.swift in Sources */,
 				2C614D0E297F6DDC00DA451A /* Dictionary+ExtensionsTests.swift in Sources */,
 				2C614D222980268300DA451A /* CharacterListPresenterTests.swift in Sources */,
 				2C614D14297F701A00DA451A /* RequestableWithHeadersTests.swift in Sources */,
+				2C614D2C29803BDC00DA451A /* CharacterListPresenterInputProtocolSpy.swift in Sources */,
 				2C614D06297F6B3000DA451A /* NetworkCoreTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

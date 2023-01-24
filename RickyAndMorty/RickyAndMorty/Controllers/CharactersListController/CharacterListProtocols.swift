@@ -10,6 +10,7 @@ import Foundation
 // MARK: - ViewController
 protocol CharacterListPresenterOutputProtocol: AnyObject {
     func didFinishedLoadingContent(success: Bool)
+    func failedLoadContent()
 }
 
 // MARK: - Presenter
@@ -28,6 +29,7 @@ protocol CharacterInteractorInputProtocol: AnyObject {
 
 protocol CharacterListInteractorOutputProtocol: AnyObject {
     func didLoadContent(result: CharacterInfo?)
+    func failedLoadContent()
 }
 
 // MARK: - Router
