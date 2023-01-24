@@ -19,7 +19,7 @@ final class CharacterListPresenter {
     private var content: [CharacterModel] = []
     private var info: CharacterInfo?
     private var currentFilter: [String: String]?
-    var currentPage: Int = 1
+    private var currentPage: Int = 1
     
     // MARK: - init
     init(router: CharacterListRouterProtocol, interactor: CharacterInteractorInputProtocol) {

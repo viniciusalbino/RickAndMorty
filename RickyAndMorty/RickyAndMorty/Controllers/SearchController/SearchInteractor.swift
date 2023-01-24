@@ -17,12 +17,17 @@ final class SearchInteractor {
 extension SearchInteractor: SearchInteractorInputProtocol {
     func search(name: String) {
         let dto = CharacterSearchDTO(name: name)
-        Task.init {
-            let request = await CharacterRequest().getWithParameters(dict: dto.dto())
-            do {
-                var result = try? request.get() as CharacterInfo
-                result?.filterApplyed = dto.dto()
-                output?.didExecutedSearch(result: result)
+        let requestable = GetCharactersParameters(parameters: dto.dto())
+        requestable.request { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let data):
+                self.output?.didExecutedSearch(result: data)
+            case .failure(let error):
+                break
+//                self.output?.errorGettingCharacters(error: error)
             }
         }
     }

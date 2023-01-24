@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 final class HomePresenter {
     
@@ -32,19 +31,9 @@ final class HomePresenter {
 // MARK: - Presenter Input Protocol
 extension HomePresenter: HomePresenterInputProtocol {
     func loadContent() {
-        Task.init {
-            characters = await self.interactor.getCharacters()?.results ?? []
-            locations = await self.interactor.getLocations()?.results ?? []
-            episodes = await self.interactor.getEpisodes()?.results ?? []
-            
-            var currentSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
-            currentSnapshot.appendSections(Section.allCases)
-            currentSnapshot.appendItems(characters, toSection: Section.characters)
-            currentSnapshot.appendItems(locations, toSection: Section.locations)
-            currentSnapshot.appendItems(episodes, toSection: Section.episodes)
-            
-            viewController?.handle(payload: currentSnapshot)
-        }
+        interactor.getCharacters()
+        interactor.getEpisodes()
+        interactor.getLocations()
     }
     
     func loadSectionController(section: Section) {
@@ -74,5 +63,39 @@ extension HomePresenter: HomePresenterInputProtocol {
 
 // MARK: - Presenter Output Protocol
 extension HomePresenter: HomeInteractorOutputProtocol {
+    func didGetCharacters(data: CharacterInfo?) {
+        guard let content = data else {
+            return
+        }
+        characters = content.results
+        viewController?.reloadData(data: characters, section: Section.characters)
+    }
     
+    func errorGettingCharacters(error: Error) {
+        
+    }
+    
+    func didGetEpisodes(data: EpisodesInfo?) {
+        guard let content = data else {
+            return
+        }
+        episodes = content.results
+        viewController?.reloadData(data: episodes, section: Section.episodes)
+    }
+    
+    func errorGettingEpisodes(error: Error) {
+        
+    }
+    
+    func didGetLocations(data: LocationsInfo?) {
+        guard let content = data else {
+            return
+        }
+        locations = content.results
+        viewController?.reloadData(data: locations, section: Section.locations)
+    }
+    
+    func errorGettingLocations(error: Error?) {
+        
+    }
 }

@@ -53,6 +53,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
         title = "Home".localized()
         view.backgroundColor = .designSystem(.secondaryColor)
         
+        currentSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        currentSnapshot?.appendSections(Section.allCases)
+        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: generateLayout())
         collectionView.delegate = self
         collectionView.register(CharacterCell.self, forCellWithReuseIdentifier: CharacterCell.reuseIdentifer)
@@ -109,15 +112,12 @@ class HomeViewController: UIViewController, UICollectionViewDelegate {
 
 // MARK: - Presenter output protocol
 extension HomeViewController: HomePresenterOutputProtocol {
-    func handle(payload: NSDiffableDataSourceSnapshot<Section, AnyHashable>) {
-        currentSnapshot = payload
+    func reloadData(data: [AnyHashable], section: Section) {
         performUIUpdate {
             self.stopLoading()
+            self.currentSnapshot?.appendItems(data, toSection: section)
+            self.dataSource?.apply(self.currentSnapshot!, animatingDifferences: true)
         }
-        guard let snapShot = currentSnapshot else{
-            return
-        }
-        dataSource?.apply(snapShot, animatingDifferences: true)
     }
 }
 

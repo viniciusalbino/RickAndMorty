@@ -16,13 +16,19 @@ final class CharacterListInteractor {
 
 extension CharacterListInteractor: CharacterInteractorInputProtocol {
     func loadPage(page: Int, filter: [String : String]) {
-        Task.init {
-            var parameters = filter
-            parameters.addDictionary(dictionaryToAppend: ["page": "\(page)"])
-            let request = await CharacterRequest().getWithParameters(dict: parameters)
-            do {
-                let result = try? request.get() as CharacterInfo
-                output?.didLoadContent(result: result)
+        var parameters = filter
+        parameters.addDictionary(dictionaryToAppend: ["page": "\(page)"])
+        let requestable = GetCharactersParameters(parameters: parameters)
+        requestable.request { [weak self] result in
+            guard let self = self else {
+                return
+            }
+            switch result {
+            case .success(let data):
+                self.output?.didLoadContent(result: data)
+            case .failure(let error):
+                break
+//                self.output?.errorGettingCharacters(error: error)
             }
         }
     }  
