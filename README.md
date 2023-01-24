@@ -1,5 +1,4 @@
 
-
 ----
 
 # **Ricky And Morty APp**
